@@ -34,5 +34,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     NavegarLayoutTheme {
+        AppNavigation()
     }
 }
