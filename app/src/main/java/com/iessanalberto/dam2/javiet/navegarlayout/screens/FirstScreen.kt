@@ -1,9 +1,7 @@
 package com.iessanalberto.dam2.javiet.navegarlayout.screens
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Card
@@ -40,18 +38,21 @@ fun BodyContent(navController: NavController) {
                 Card(
 
                 ) {
-                    Image(painter = painterResource(id = cientifica.ImageId),contentDescription = null)
-                    var pistasTotales=""
-                    for (i in 0..cientifica.Pistas.size){
-                        pistasTotales+= cientifica.Pistas[i]
+                    Column() {
+                        Image(painter = painterResource(id = cientifica.ImageId),contentDescription = null, modifier = Modifier.size(200.dp))
+                        var pistasTotales=""
+                        for (i in 0 until cientifica.Pistas.size){
+                            pistasTotales+= cientifica.Pistas[i]
+                        }
+                        Text(
+                            text = pistasTotales,
+                            modifier = Modifier
+                                .padding(10.dp),
+                            fontStyle = FontStyle.Italic,
+                            fontSize = 15.sp
+                        )
                     }
-                    Text(
-                        text = pistasTotales,
-                        modifier = Modifier
-                            .padding(10.dp),
-                        fontStyle = FontStyle.Italic,
-                        fontSize = 60.sp
-                    )
+
                 }
             }
         }
