@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.iessanalberto.dam2.javiet.navegarlayout.ui
+package com.iessanalberto.dam2.javiet.navegarlayout.screens
 
 import android.app.Activity
 import androidx.compose.foundation.layout.Arrangement
@@ -52,7 +52,7 @@ import com.example.android.unscramble.R
 import com.example.android.unscramble.ui.theme.UnscrambleTheme
 */
 
-
+/*
 @Composable
 fun GameScreen(
     modifier: Modifier = Modifier,
@@ -67,7 +67,7 @@ fun GameScreen(
     ) {
 
         GameStatus(
-            wordCount = gameUiState.currentWordCount,
+            scientificCount = gameUiState.currentScientific,
             score = gameUiState.score
         )
         GameLayout(
@@ -112,7 +112,7 @@ fun GameScreen(
 }
 
 @Composable
-fun GameStatus(wordCount: Int, score: Int,modifier: Modifier = Modifier) {
+fun GameStatus(scientificCount: Int, score: Int,modifier: Modifier = Modifier) {
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -226,4 +226,4 @@ fun DefaultPreview() {
     UnscrambleTheme {
         GameScreen()
     }
-}
+}*/

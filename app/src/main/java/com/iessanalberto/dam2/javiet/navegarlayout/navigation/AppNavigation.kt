@@ -9,8 +9,10 @@ import com.iessanalberto.dam2.javiet.navegarlayout.screens.*
 
 fun AppNavigation(){
     val navController = rememberNavController()
-    NavHost(navController =navController, startDestination =  AppScreens.firstScreen.route){
+    NavHost(navController =navController, startDestination =  AppScreens.initScreen.route){
         composable(route= AppScreens.firstScreen.route){FirstScreen(navController)}
+        composable(route= AppScreens.secondScreen.route){SecondScreen(navController )}
+        composable(route= AppScreens.initScreen.route){InitScreen(navController)}
         composable(route= AppScreens.secondScreen.route){SecondScreen(navController )}
     }
 }
