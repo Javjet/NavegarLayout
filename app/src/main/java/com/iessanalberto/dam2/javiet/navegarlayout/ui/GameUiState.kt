@@ -9,4 +9,5 @@ data class GameUiState(
     val score: Int = 0,
     val isGuessedScientificWrong: Boolean = false,
     val isGameOver: Boolean = false,
+    val positionLearn: Int=0,
     )

@@ -1,10 +1,12 @@
 package com.iessanalberto.dam2.javiet.navegarlayout.ui
 
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import kotlinx.coroutines.flow.MutableStateFlow
 import androidx.lifecycle.ViewModel
+import androidx.navigation.NavController
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -103,6 +105,30 @@ class GameViewModel : ViewModel() {
         userGuess = guessedWord
     }
 
+    fun goForwardKey(lista: List<Cientificas>) {
+        if (!CientificasLista[CientificasLista.indexOf(lista[0])].equals((CientificasLista.last()))){
+            _uiState.update { currentState ->
+                currentState.copy(positionLearn = currentState.positionLearn+1)
+            }
+        }
+        else{
+            _uiState.update { currentState ->
+                currentState.copy(positionLearn = 0)
+            }
+        }
+    }
+    fun goBackKey(lista: List<Cientificas>) {
+        if (!CientificasLista[CientificasLista.indexOf(lista[0])].equals((CientificasLista.first()))){
+            _uiState.update { currentState ->
+                currentState.copy(positionLearn = currentState.positionLearn-1)
+            }
+        }
+        else{
+            _uiState.update { currentState ->
+                currentState.copy(positionLearn = CientificasLista.size-1)
+            }
+        }
+    }
 
     fun skipWord() {
         updateGameState(_uiState.value.score)

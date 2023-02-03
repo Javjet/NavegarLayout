@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.iessanalberto.dam2.javiet.navegarlayout.CientificasLista
 import com.iessanalberto.dam2.javiet.navegarlayout.navigation.AppScreens
 
 @Composable
@@ -35,3 +36,4 @@ fun secondBodyContent(navController: NavController) {
         Text(text="Hola mundo Due")
     }
 }
+
