@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">NavegarLayout</string>
+    <string name="instructions" />
+    <string name="wrong_guess" />
+    <string name="enter_your_word" />
+    <string name="congratulations" />
+    <string name="you_scored" />
+    <string name="exit" />
+    <string name="play_again" />
+    <string name="score" />
+    <string name="word_count" />
+    <string name="submit" />
+    <string name="skip" />
+    <string name="whoim">¿Quien Soy?</string>
 </resources>

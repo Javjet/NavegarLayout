@@ -3,6 +3,7 @@ package com.iessanalberto.dam2.javiet.navegarlayout.screens
 import android.graphics.Paint.Style
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -46,7 +47,7 @@ fun initBodyContent(navController: NavController) {
         verticalArrangement = Arrangement.Top
     ){
 
-        Spacer(modifier = Modifier.height(40.dp))
+        Spacer(modifier = Modifier.height(80.dp))
         Box(
             modifier = Modifier
                 .height(100.dp)
@@ -56,9 +57,9 @@ fun initBodyContent(navController: NavController) {
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.Top) {
                 Image(painter = painterResource(id = R.drawable.onceflogonobackground),
-                    contentDescription = "Logo 11F", Modifier.width(80.dp) )
+                    contentDescription = "Logo 11F", Modifier.size(110.dp) )
 
-                Text("Quien Soy,\nCientificas", fontSize = 30.sp, color = Color.White, modifier = Modifier.width(200.dp) )
+                Text("Quien Soy,\nCientificas", fontSize = 40.sp, color = Color.White, modifier = Modifier.width(250.dp) )
                 Spacer(modifier = Modifier.width(20.dp))
 
             }
@@ -67,22 +68,34 @@ fun initBodyContent(navController: NavController) {
 
         Spacer(modifier = Modifier.height(40.dp))
         Button(modifier = Modifier
-            .width(140.dp)
-            .height(40.dp), onClick = { navController.navigate(route = AppScreens.gameScreen.route)}) {
-            Text(text = "Juega")
+            .border(2.dp, Color.Black, shape = RoundedCornerShape(90.dp))
+            .width(180.dp)
+            .height(60.dp),
+            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Gray,contentColor = Color.White),
+            shape=RoundedCornerShape(90.dp),
+            onClick = { navController.navigate(route = AppScreens.gameScreen.route)}) {
+            Text(text = "Juega", fontSize = 20.sp)
         }
         Spacer(modifier = Modifier.height(20.dp))
         Button(modifier = Modifier
-            .width(140.dp)
-            .height(40.dp), onClick = {navController.navigate(route = AppScreens.firstScreen.route)}) {
-            Text(text = "Aprende")
+            .border(2.dp, Color.Black, shape = RoundedCornerShape(90.dp))
+            .width(180.dp)
+            .height(60.dp),
+            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Gray,contentColor = Color.White),
+            shape=RoundedCornerShape(90.dp),
+            onClick = {navController.navigate(route = AppScreens.firstScreen.route)}) {
+            Text(text = "Aprende", fontSize = 20.sp)
         }
 
         Spacer(modifier = Modifier.height(20.dp))
         Button(modifier = Modifier
-            .width(140.dp)
-            .height(40.dp), onClick = {navController.navigate(route = AppScreens.secondScreen.route)}) {
-            Text(text = "Instrucciones")
+            .border(2.dp, Color.Black, shape = RoundedCornerShape(90.dp))
+            .width(180.dp)
+            .height(60.dp),
+            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Gray,contentColor = Color.White),
+            shape=RoundedCornerShape(90.dp),
+            onClick = {navController.navigate(route = AppScreens.secondScreen.route)}) {
+            Text(text = "Instrucciones",fontSize = 20.sp)
         }
     }
 }

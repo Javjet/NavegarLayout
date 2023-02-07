@@ -1,4 +1,4 @@
-package com.iessanalberto.dam2.javiet.navegarlayout.ui.p
+package com.iessanalberto.dam2.javiet.navegarlayout.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
