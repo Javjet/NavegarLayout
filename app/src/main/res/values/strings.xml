@@ -1,15 +1,15 @@
 <resources>
     <string name="app_name">NavegarLayout</string>
-    <string name="instructions" />
-    <string name="wrong_guess" />
-    <string name="enter_your_word" />
-    <string name="congratulations" />
-    <string name="you_scored" />
-    <string name="exit" />
-    <string name="play_again" />
-    <string name="score" />
-    <string name="word_count" />
-    <string name="submit" />
-    <string name="skip" />
+    <string name="instructions">Instrucciones</string>
+    <string name="wrong_guess">Incorrecto</string>
+    <string name="enter_your_word">Introduzca el nombre de la científica</string>
+    <string name="congratulations">Felicidades</string>
+    <string name="you_scored">Tu Puntuación</string>
+    <string name="exit">Salir</string>
+    <string name="play_again" >Volver a Jugar</string>
+    <string name="score" >Puntuacion</string>
+    <string name="scientific_count">Científicas</string>
+    <string name="submit" >Enviar</string>
+    <string name="skip" >Saltar</string>
     <string name="whoim">¿Quien Soy?</string>
 </resources>

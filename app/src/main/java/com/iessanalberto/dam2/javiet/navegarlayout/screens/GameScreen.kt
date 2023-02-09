@@ -18,20 +18,17 @@
 package com.iessanalberto.dam2.javiet.navegarlayout.screens
 
 import android.app.Activity
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.AlertDialog
-import androidx.compose.material.Button
-import androidx.compose.material.OutlinedButton
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
-import androidx.compose.material.TextButton
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -39,7 +36,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -73,7 +69,7 @@ fun GameScreen(
             .background(OnceColor)
             .verticalScroll(rememberScrollState())
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(16.dp,0.dp,16.dp,16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
 
@@ -86,6 +82,7 @@ fun GameScreen(
             isGuessWrong = gameUiState.isGuessedScientificWrong,
             onUserGuessChanged = { gameViewModel.updateUserGuess(it) },
             onKeyboardDone = {gameViewModel.checkUserGuess() },
+            gameViewModel= gameViewModel,
             currentScientific = gameUiState.currentScientificData,
         )
         Row(
@@ -95,7 +92,7 @@ fun GameScreen(
             horizontalArrangement = Arrangement.SpaceAround
         ) {
             OutlinedButton(
-                onClick = { gameViewModel.skipWord() },
+                onClick = { gameViewModel.skipScientific() },
                 modifier = Modifier
                     .weight(1f)
                     .padding(end = 8.dp)
@@ -131,7 +128,7 @@ fun GameStatus(scientificCount: Int, score: Int,modifier: Modifier = Modifier) {
             .size(48.dp),
     ) {
         Text(
-            text = stringResource(R.string.word_count, scientificCount),
+            text = stringResource(R.string.scientific_count, scientificCount),
             fontSize = 18.sp,
         )
         Text(
@@ -151,19 +148,24 @@ fun GameLayout(
     userGuess: String,
     onUserGuessChanged: (String) -> Unit,
     onKeyboardDone: () -> Unit,
+    gameViewModel: GameViewModel,
     modifier: Modifier = Modifier) {
     var cientifica: List<Cientificas> = listOf(currentScientific) as List<Cientificas>
     var imageId: Int =0
+
+    Text(text = "asdasd")
     Column(
-        verticalArrangement = Arrangement.spacedBy(24.dp),
+        verticalArrangement = Arrangement.spacedBy(10.dp),
         horizontalAlignment = Alignment.CenterHorizontally
         ) {
+        val gameUiState by gameViewModel.uiState.collectAsState()
         Image( painter = painterResource(id = R.drawable.unknown_girl),contentDescription = null,
-            modifier = Modifier.size(200.dp),alignment = Alignment.Center, )
+            modifier = Modifier.size(100.dp),alignment = Alignment.Center, )
 
         Text(
-            text = stringResource(R.string.whoim),
-            fontSize = 35.sp, fontStyle = FontStyle.Italic, fontWeight = FontWeight.Bold,
+            //text = stringResource(R.string.whoim),
+            text = cientifica[0].nombre,
+            fontSize = 30.sp, fontStyle = FontStyle.Italic, fontWeight = FontWeight.Bold,
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
         LazyColumn(
@@ -176,16 +178,18 @@ fun GameLayout(
         {
             items(cientifica){
                     cientifica ->
-
                 var pistasTotales=""
-                for (i in 0 until cientifica.Pistas.size){
+                if(gameUiState.cluePosition<=cientifica.Pistas.size){
+                for (i in 0 until gameUiState.cluePosition){
 
                     if (!cientifica.Pistas[i].contains("ImagenExterna")){
-                        pistasTotales+= cientifica.Pistas[i]
+                        pistasTotales+= cientifica.Pistas[i]+"\n"
                     }else {
-                        imageId= cientifica.Pistas[i].replace("ImagenExterna","").toInt()
+                        pistasTotales+=cientifica.Pistas[i].split("ImagenExterna")[0]
+                        imageId= cientifica.Pistas[i].split("ImagenExterna")[1].toInt()
 
                     }
+                }
                 }
 
                 Box(modifier = Modifier
@@ -194,29 +198,49 @@ fun GameLayout(
                     .background(Color.White)
                     .padding(20.dp)
                 ){
-                    Text(
-                        text = pistasTotales,
-                        modifier = Modifier
-                            .padding(10.dp),
-                        fontStyle = FontStyle.Italic,
-                        fontSize = 20.sp
-                    )
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(
+                            text = pistasTotales,
+                            modifier = Modifier
+                                .padding(10.dp),
+                            fontStyle = FontStyle.Italic,
+                            fontSize = 16.sp
+                        )
+                        if (imageId!=0) {
+                                Image(
+                                    painter = painterResource(id = imageId),
+                                    contentDescription = null,
+                                    alignment = Alignment.BottomCenter,
+                                )
+                        }
+                        var visible=true
+                        if (gameUiState.cluePosition>=10){
+                            visible=false
+                        }
+                        this@Column.AnimatedVisibility(visible = visible) {
+                            Button(modifier = Modifier
+                                .border(2.dp, Color.Black, shape = RoundedCornerShape(90.dp))
+                                .width(180.dp)
+                                .height(60.dp),
+                                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Gray,contentColor = Color.White),
+                                shape=RoundedCornerShape(90.dp),
+                                onClick = {gameViewModel.updateClue() }) {
+                                Text(text = "Siguiente Pista")
+                                Icon(
+                                    Icons.Filled.KeyboardArrowRight,
+                                    contentDescription = "Avanzar",
+                                    tint = Color.LightGray
+                                )
+                            }
+                        }
+                    }
+
 
                 }
-                if (imageId!=0) {
-                    Box(modifier = Modifier
-                        .border(2.dp, Color.Black, RoundedCornerShape(55.dp))
-                        .clip(RoundedCornerShape(55.dp))
-                        .background(Color.White)
-                        .padding(20.dp)
-                    ) {
-                        Image(
-                            painter = painterResource(id = imageId),
-                            contentDescription = null,
-                            alignment = Alignment.BottomCenter,
-                        )
-                    }
-                    }
+
+
+
+
             }
         }
         OutlinedTextField(
@@ -224,6 +248,7 @@ fun GameLayout(
             singleLine = true,
             modifier = Modifier.fillMaxWidth(),
             onValueChange = onUserGuessChanged,
+
             label = {
                 if (isGuessWrong) {
                     Text(stringResource(R.string.wrong_guess))

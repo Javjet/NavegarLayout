@@ -5,13 +5,13 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.layout.R
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.runtime.Composable
@@ -25,6 +25,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.font.FontWeight.Companion.Bold
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -38,8 +39,9 @@ import com.iessanalberto.dam2.javiet.navegarlayout.ui.theme.OnceColor
 
 @Composable
 fun LearnScreen(navController: NavController,gameViewModel: GameViewModel = viewModel()){
-    Scaffold() {
+    Scaffold(floatingActionButtonPosition = FabPosition.End) {
         BodyContent(navController)
+
     }
 }
 
@@ -56,7 +58,7 @@ fun BodyContent(navController: NavController,gameViewModel: GameViewModel = view
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally) {
         Spacer(modifier = Modifier.height(20.dp))
-        Box(modifier = Modifier.size(300.dp).fillMaxSize()){
+        Box(modifier = Modifier.size(200.dp).fillMaxSize()){
 
             Image( painter = painterResource(id = lista[0].ImageId),contentDescription = null, modifier = Modifier.fillMaxSize()
 
@@ -65,7 +67,7 @@ fun BodyContent(navController: NavController,gameViewModel: GameViewModel = view
         }
 
         Spacer(modifier = Modifier.height(10.dp))
-        Text(text = lista[0].nombre, fontSize = 35.sp, fontStyle = FontStyle.Italic, fontWeight = Bold)
+        Text(text = lista[0].nombre, fontSize = 30.sp, fontStyle = FontStyle.Italic, fontWeight = Bold, textAlign = TextAlign.Center)
         Row() {
             IconButton(modifier = Modifier.background(Color.Gray, shape = RoundedCornerShape(100.dp)),onClick = {gameViewModel.goBackKey(lista) }) {
                 Icon(

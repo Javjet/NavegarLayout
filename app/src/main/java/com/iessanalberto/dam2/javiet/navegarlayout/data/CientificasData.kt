@@ -2,7 +2,7 @@ package com.iessanalberto.dam2.javiet.navegarlayout
 
 import com.iessanalberto.dam2.javiet.navegarlayout.data.Cientificas
 
-val marie = Cientificas ("Marie Curie\n", arrayOf(
+val marie = Cientificas ("Marie Curie", arrayOf(
         "1. Nació en Polonia\n",
         "2. Desarrolló toda su carrera profesional en Francia\n",
         "3. Estudió física y matemáticas\n",
@@ -15,7 +15,7 @@ val marie = Cientificas ("Marie Curie\n", arrayOf(
         "10. Murió en 1934 probablemente a causa de efectos de las radiaciones a las que había estado expuesta sin protección\n"
     ),R.drawable.marie_curie)
 
-    val youyou = Cientificas ("Tu Youyou\n", arrayOf(
+    val youyou = Cientificas ("Tu Youyou", arrayOf(
         "1. Nació en China en 1930\n",
         "2. Especialista en química farmacéutica\n",
         "3. Estudió muchos remedios tradicionales chinos para buscar la base científica de su utilidad\n",
@@ -28,7 +28,7 @@ val marie = Cientificas ("Marie Curie\n", arrayOf(
         "10. Vive en Beijing\n"
     ),R.drawable.tu_youyou)
 
-    val gertrude = Cientificas ("Gertrude B. Elion\n", arrayOf(
+    val gertrude = Cientificas ("Gertrude B. Elion", arrayOf(
         "1. Nació en Estados Unidos\n",
         "2. Su abuelo falleció de cáncer y decidió ser científica para evitar sufrimientos como el suyo\n",
         "3. Recibió el premio Nobel de medicina\n",
@@ -41,7 +41,7 @@ val marie = Cientificas ("Marie Curie\n", arrayOf(
         "10. Falleció en USA en 1999\n"
     ),R.drawable.gertrude_b_elion)
 
-    val josefa = Cientificas ("Josefa Yzuel\n", arrayOf(
+    val josefa = Cientificas ("Josefa Yzuel", arrayOf(
         "1. Nació en Huesca en 1940\n",
         "2. Estudió física\n",
         "3. Su investigación ha estado siempre relacionada con la óptica\n",
@@ -54,7 +54,7 @@ val marie = Cientificas ("Marie Curie\n", arrayOf(
         "10. Académica de la Real Academia de Ciencias y artes de Barcelona, de la Academia de Ciencias de Granada y de la RA de Ciencias Exactas, físicas, químicas y naturales de Zaragoza\n"
     ),R.drawable.josefa_yzuel)
 
-    val hedy= Cientificas ("Hedy Lamarr\n", arrayOf(
+    val hedy= Cientificas ("Hedy Lamarr", arrayOf(
         "1. Nació en Viena en 1914\n",
         "2. Su nombre real era Hedwig Kiesler\n",
         "3. Se casó muy joven con un comerciante de armas\n",
@@ -67,7 +67,7 @@ val marie = Cientificas ("Marie Curie\n", arrayOf(
         "10. Murió en 2000\n"
     ),R.drawable.hedy_lamarr)
 
-    val rita= Cientificas ("Rita Levi Montalcini\n", arrayOf(
+    val rita= Cientificas ("Rita Levi Montalcini", arrayOf(
         "1. Nació en Italia\n",
         "2. Estudió medicina en Turín\n",
         "3. Recibió el premio Nobel de medicina\n",
@@ -80,7 +80,7 @@ val marie = Cientificas ("Marie Curie\n", arrayOf(
         "10. Montó un laboratorio en su propia habitación\n"
     ),R.drawable.rita_levi_montalcini)
 
-    val fbarre= Cientificas ("François Barré-Sinoussi\n", arrayOf(
+    val fbarre= Cientificas ("François Barré-Sinoussi", arrayOf(
         "1. Nació en París en 1943\n",
         "2. Se licenció en bioquímica\n",
         "3. Es especialista en virología en el Instituto Pasteur de París\n",
@@ -93,7 +93,7 @@ val marie = Cientificas ("Marie Curie\n", arrayOf(
         "10. Sigue trabajando en la investigación contra el SIDA en la búsqueda de una vacuna contra el virus\n"
     ),R.drawable.francois_barre_sinoussi)
 
-    val rosalind= Cientificas ("Rosalind Franklin\n", arrayOf(
+    val rosalind= Cientificas ("Rosalind Franklin", arrayOf(
         "1. Nació en Londres en 1920\n",
         "2. Pertenecía a una familia judía de clase alta\n",
         "3. Estudió química-física en Cambidge\n",
@@ -106,7 +106,7 @@ val marie = Cientificas ("Marie Curie\n", arrayOf(
         "10. Las conclusiones obtenidas a partir de la foto 51 permitieron que Watson, Crick y Wilkins obtuvieran en premio Nobel en 1962\n"
     ),R.drawable.rosalind_franklin)
 
-    val dorothy= Cientificas ("Dorothy Crowfoot-Hodgkin\n", arrayOf(
+    val dorothy= Cientificas ("Dorothy Crowfoot-Hodgkin", arrayOf(
         "1. Nació en El Cairo en 1910\n",
         "2. Estudió química en la Universidad de Oxford\n",
         "3. Se especializó en cristalografía\n",
@@ -119,7 +119,7 @@ val marie = Cientificas ("Marie Curie\n", arrayOf(
         "10. Falleció en 1994\n"
     ),R.drawable.dorothy_crowfoot_hodgkin)
 
-    val jocelyn= Cientificas ("Jocelyn Bell-Burnell\n", arrayOf(
+    val jocelyn= Cientificas ("Jocelyn Bell-Burnell", arrayOf(
         "1. Nació en Irlanda del Norte en 1943\n",
         "2. Es astrofísica\n",
         "3. Se doctoró en la Universidad de Cambridge\n",
@@ -132,7 +132,7 @@ val marie = Cientificas ("Marie Curie\n", arrayOf(
         "10. Ha recibido la Medalla de oro del CSIC\n"
     ),R.drawable.jocelyn_bell_burnell)
 
-    val angela= Cientificas ("Ángela Ruiz Robles\n", arrayOf(
+    val angela= Cientificas ("Ángela Ruiz Robles", arrayOf(
         "1. Nació en Villamanín en 1895\n",
         "2. Estudió magisterio en León\n",
         "3. Casi toda su carrera la desarrolló en Ferrol\n",
@@ -142,11 +142,10 @@ val marie = Cientificas ("Marie Curie\n", arrayOf(
         "7. El libro mecánico incluía enlaces que permitían ir de unas partes a otras\n",
         "8. Un prototipo de esta enciclopedia se conserva en el Museo de Ciencia y Tecnología de La Coruña\n",
         "9. Falleció en 1974\n",
-        "10. Se la conoce por haber inventado esto\n",
-        "ImagenExterna"+R.drawable.invento.toString()
+        "10. Se la conoce por haber inventado esto\nImagenExterna"+R.drawable.invento.toString()
     ),R.drawable.angela_ruiz_robles)
 
-    val margarita= Cientificas ("Margarita Salas\n", arrayOf(
+    val margarita= Cientificas ("Margarita Salas", arrayOf(
         "1. Nació en Asturias en 1938\n",
         "2. Estudió Químicas y se especializó en Bioquímica\n",
         "3. Trabajó en USA con el premio Nobel español Severo Ochoa\n",
@@ -160,7 +159,7 @@ val marie = Cientificas ("Marie Curie\n", arrayOf(
 
         ),R.drawable.margarita_salas)
 
-    val josefina= Cientificas ("Josefina Castellví\n", arrayOf(
+    val josefina= Cientificas ("Josefina Castellví", arrayOf(
         "1. Nació en Barcelona en 1935\n",
         "2. Estudió biología y se especializó en oceanografía\n",
         "3. Ha desarrollado toda su carrera científica vinculada al CSIC\n",
@@ -174,7 +173,7 @@ val marie = Cientificas ("Marie Curie\n", arrayOf(
 
     ),R.drawable.josefina_castellvi)
 
-    val barbara= Cientificas ("Barbara McClintock\n", arrayOf(
+    val barbara= Cientificas ("Barbara McClintock", arrayOf(
         "1. Nació en Nueva York en 1902\n",
         "2. Estudió biología\n",
         "3. Se especializó en el estudio del maíz\n",
@@ -188,7 +187,7 @@ val marie = Cientificas ("Marie Curie\n", arrayOf(
 
     ),R.drawable.barbara_mcclintock)
 
-    val angeles= Cientificas ("Ángeles Alvariño\n", arrayOf(
+    val angeles= Cientificas ("Ángeles Alvariño", arrayOf(
         "1. Nació en Ferrol en 1916\n",
         "2. Estudió Ciencias Naturales en Madrid\n",
         "3. Se especializó en oceanografía\n",

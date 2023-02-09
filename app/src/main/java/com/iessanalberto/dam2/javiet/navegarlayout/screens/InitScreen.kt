@@ -3,6 +3,7 @@ package com.iessanalberto.dam2.javiet.navegarlayout.screens
 import android.graphics.Paint.Style
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -34,20 +35,23 @@ fun InitScreen(navController: NavController){
 
 
     }*/
+
     initBodyContent(navController)
 
 }
 @Composable
 fun initBodyContent(navController: NavController) {
 
+
     Column(modifier = Modifier
         .background(color = Color(0xFF03aca5))
-        .fillMaxSize(),
+        .fillMaxSize()
+        .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
-    ){
+    ) {
 
-        Spacer(modifier = Modifier.height(80.dp))
+        Spacer(modifier = Modifier.height(40.dp))
         Box(
             modifier = Modifier
                 .height(100.dp)
@@ -97,5 +101,8 @@ fun initBodyContent(navController: NavController) {
             onClick = {navController.navigate(route = AppScreens.secondScreen.route)}) {
             Text(text = "Instrucciones",fontSize = 20.sp)
         }
+        Spacer(modifier = Modifier.height(20.dp))
     }
+
+
 }
