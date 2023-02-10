@@ -28,7 +28,9 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -69,7 +71,7 @@ fun GameScreen(
             .background(OnceColor)
             .verticalScroll(rememberScrollState())
             .fillMaxSize()
-            .padding(16.dp,0.dp,16.dp,16.dp),
+            .padding(16.dp, 0.dp, 16.dp, 16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
 
@@ -88,26 +90,46 @@ fun GameScreen(
         Row(
             modifier = modifier
                 .fillMaxWidth()
-                .padding(top = 16.dp),
+                .padding(top = 16.dp)
+                .background(OnceColor),
             horizontalArrangement = Arrangement.SpaceAround
         ) {
             OutlinedButton(
-                onClick = { gameViewModel.skipScientific() },
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color.White,contentColor = Color.Gray),
                 modifier = Modifier
                     .weight(1f)
-                    .padding(end = 8.dp)
-            ) {
-                Text(stringResource(R.string.skip))
-            }
-
-            Button(
-                modifier = modifier
+                    .padding(8.dp, 0.dp, end = 8.dp, 0.dp)
                     .fillMaxWidth()
+                    .height(55.dp)
+                    .border(2.dp, Color.Black, shape = RoundedCornerShape(90.dp)),
+
+                shape=RoundedCornerShape(90.dp),
+                onClick = { gameViewModel.skipScientific() },
+            ) {
+                Text(stringResource(R.string.skip), fontSize = 20.sp, fontWeight = FontWeight.Bold)
+            }
+            Button(
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Gray,contentColor = Color.White),
+                modifier = Modifier
                     .weight(1f)
-                    .padding(start = 8.dp),
+                    .padding(start = 8.dp, 0.dp, 0.dp, 0.dp)
+                    .fillMaxWidth()
+                    .height(55.dp)
+                    .border(2.dp, Color.Black, shape = RoundedCornerShape(90.dp)),
+
+                shape=RoundedCornerShape(90.dp),
                 onClick = { gameViewModel.checkUserGuess() }
             ) {
-                Text(stringResource(R.string.submit))
+                Text(stringResource(R.string.submit), fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                /*
+                Button(modifier = Modifier
+                .border(2.dp, Color.Black, shape = RoundedCornerShape(90.dp))
+                .fillMaxWidth()
+                .weight(1f)
+                .padding(start = 8.dp),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Gray,contentColor = Color.White),
+                shape=RoundedCornerShape(90.dp),
+                */
             }
         }
         if (gameUiState.isGameOver) {
@@ -168,6 +190,7 @@ fun GameLayout(
             fontSize = 30.sp, fontStyle = FontStyle.Italic, fontWeight = FontWeight.Bold,
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
+        if (!gameUiState.CompressView) {
         LazyColumn(
             modifier = Modifier
                 .padding(20.dp)
@@ -178,57 +201,86 @@ fun GameLayout(
         {
             items(cientifica){
                     cientifica ->
-                var pistasTotales=""
-                if(gameUiState.cluePosition<=cientifica.Pistas.size){
-                for (i in 0 until gameUiState.cluePosition){
 
-                    if (!cientifica.Pistas[i].contains("ImagenExterna")){
-                        pistasTotales+= cientifica.Pistas[i]+"\n"
-                    }else {
-                        pistasTotales+=cientifica.Pistas[i].split("ImagenExterna")[0]
-                        imageId= cientifica.Pistas[i].split("ImagenExterna")[1].toInt()
+                    var pistasTotales = ""
+                    if (gameUiState.cluePosition <= cientifica.Pistas.size) {
+                        for (i in 0 until gameUiState.cluePosition) {
 
+                            if (!cientifica.Pistas[i].contains("ImagenExterna")) {
+                                pistasTotales += cientifica.Pistas[i] + "\n"
+                            } else {
+                                pistasTotales += cientifica.Pistas[i].split("ImagenExterna")[0]
+                                imageId = cientifica.Pistas[i].split("ImagenExterna")[1].toInt()
+
+                            }
+                        }
                     }
-                }
-                }
 
-                Box(modifier = Modifier
-                    .border(2.dp, Color.Black, RoundedCornerShape(55.dp))
-                    .clip(RoundedCornerShape(55.dp))
-                    .background(Color.White)
-                    .padding(20.dp)
-                ){
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text(
-                            text = pistasTotales,
-                            modifier = Modifier
-                                .padding(10.dp),
-                            fontStyle = FontStyle.Italic,
-                            fontSize = 16.sp
-                        )
-                        if (imageId!=0) {
+                    Box(
+                        modifier = Modifier
+                            .border(2.dp, Color.Black, RoundedCornerShape(55.dp))
+                            .clip(RoundedCornerShape(55.dp))
+                            .background(Color.White)
+                            .padding(20.dp)
+                    ) {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            Text(
+                                text = pistasTotales,
+                                modifier = Modifier
+                                    .padding(10.dp),
+                                fontStyle = FontStyle.Italic,
+                                fontSize = 16.sp
+                            )
+                            if (imageId != 0) {
                                 Image(
                                     painter = painterResource(id = imageId),
                                     contentDescription = null,
                                     alignment = Alignment.BottomCenter,
                                 )
-                        }
-                        var visible=true
-                        if (gameUiState.cluePosition>=10){
-                            visible=false
-                        }
-                        this@Column.AnimatedVisibility(visible = visible) {
-                            Button(modifier = Modifier
-                                .border(2.dp, Color.Black, shape = RoundedCornerShape(90.dp))
-                                .width(180.dp)
-                                .height(60.dp),
-                                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Gray,contentColor = Color.White),
-                                shape=RoundedCornerShape(90.dp),
-                                onClick = {gameViewModel.updateClue() }) {
-                                Text(text = "Siguiente Pista")
+                            }
+                            var visible = true
+                            if (gameUiState.cluePosition >= 10) {
+                                visible = false
+                            }
+                            this@Column.AnimatedVisibility(visible = visible) {
+                                Button(modifier = Modifier
+                                    .border(
+                                        2.dp,
+                                        Color.Black,
+                                        shape = RoundedCornerShape(90.dp)
+                                    )
+                                    .width(180.dp)
+                                    .height(60.dp),
+                                    colors = ButtonDefaults.buttonColors(
+                                        backgroundColor = Color.Gray,
+                                        contentColor = Color.White
+                                    ),
+                                    shape = RoundedCornerShape(90.dp),
+                                    onClick = { gameViewModel.updateClue() }) {
+                                    Text(
+                                        text = "Siguiente Pista",
+                                        fontSize = 16.sp,
+                                        fontWeight = FontWeight.Bold
+                                    )
+                                    Icon(
+                                        Icons.Filled.KeyboardArrowRight,
+                                        contentDescription = "Avanzar",
+                                        tint = Color.LightGray
+                                    )
+                                }
+                            }
+                            Spacer(modifier = Modifier.height(20.dp))
+                            IconButton(modifier = Modifier
+                                .background(Color.Gray, shape = RoundedCornerShape(100.dp))
+                                .border(
+                                    2.dp,
+                                    Color.Black,
+                                    shape = RoundedCornerShape(100.dp)
+                                ),
+                                onClick = { gameViewModel.compress() }) {
                                 Icon(
-                                    Icons.Filled.KeyboardArrowRight,
-                                    contentDescription = "Avanzar",
+                                    Icons.Filled.KeyboardArrowUp,
+                                    contentDescription = "Comprimir",
                                     tint = Color.LightGray
                                 )
                             }
@@ -236,11 +288,22 @@ fun GameLayout(
                     }
 
 
-                }
-
-
-
-
+            }
+        }
+        }else{
+            IconButton(modifier = Modifier
+                .background(Color.Gray, shape = RoundedCornerShape(100.dp))
+                .border(
+                    2.dp,
+                    Color.Black,
+                    shape = RoundedCornerShape(100.dp)
+                ),
+                onClick = { gameViewModel.extends() }) {
+                Icon(
+                    Icons.Filled.KeyboardArrowDown,
+                    contentDescription = "Descomprimir",
+                    tint = Color.LightGray
+                )
             }
         }
         OutlinedTextField(

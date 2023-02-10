@@ -147,5 +147,16 @@ class GameViewModel : ViewModel() {
         // Reset user guess
         updateUserGuess("")
     }
+    fun compress() {
+        _uiState.update { currentState ->
+            currentState.copy(CompressView=true)
+        }
+    }
+
+    fun extends() {
+        _uiState.update { currentState ->
+            currentState.copy(CompressView=false)
+        }
+    }
 
 }
