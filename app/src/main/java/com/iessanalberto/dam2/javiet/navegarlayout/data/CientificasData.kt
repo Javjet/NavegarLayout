@@ -13,7 +13,11 @@ val marie = Cientificas ("Marie Curie", arrayOf(
         "8. Su hija mayor recibió el premio Nobel por el descubrimiento de la radiactividad artificial\n",
         "9. Fue la primera mujer en ocupar el puesto de profesora en la Universidad de París\n",
         "10. Murió en 1934 probablemente a causa de efectos de las radiaciones a las que había estado expuesta sin protección\n"
-    ),R.drawable.marie_curie)
+    ),R.drawable.marie_curie,"Maria Salomea Skłodowska-Curie, más conocida como Marie Curie o Madame Curie (Varsovia, 7 de noviembre de 1867-Passy, 4 de julio de 1934), fue una física y química polaca nacionalizada francesa. Pionera en el campo de la radiactividad, es la primera y única persona en recibir dos premios Nobel en distintas especialidades científicas: Física y Química. También fue la primera mujer en ocupar el puesto de profesora en la Universidad de París y la primera en recibir sepultura con honores en el Panteón de París por méritos propios en 1995." +
+        "\n" +
+        "Nació en Varsovia, en lo que entonces era el Zarato de Polonia (territorio administrado por el Imperio ruso). Estudió clandestinamente en la «universidad flotante» de Varsovia y comenzó su formación científica en dicha ciudad. En 1891, a los 24 años, siguió a su hermana mayor Bronisława Dłuska a París, donde culminó sus estudios y llevó a cabo sus trabajos científicos más sobresalientes. Compartió el premio Nobel de Física de 1903 con su marido Pierre Curie y el físico Henri Becquerel. Años después, ganó en solitario el premio Nobel de Química de 1911. Aunque recibió la ciudadanía francesa y apoyó a su nueva patria, nunca perdió su identidad polaca: enseñó a sus hijas su lengua materna y las llevaba a sus visitas a Polonia. Nombró el primer elemento químico que descubrió, el polonio, como su país de origen.\n" +
+        "\n" +
+        "Sus logros incluyen los primeros estudios sobre el fenómeno de la radiactividad (término que ella misma acuñó), técnicas para el aislamiento de isótopos radiactivos y el descubrimiento de dos elementos —el polonio y el radio—. Bajo su dirección, se llevaron a cabo los primeros estudios en el tratamiento de neoplasias con isótopos radiactivos. Fundó el Instituto Curie en París y en Varsovia, que se mantienen entre los principales centros de investigación médica en la actualidad. Durante la Primera Guerra Mundial creó los primeros centros radiológicos para uso militar. Murió en 1934 a los 66 años, en el sanatorio Sancellemoz en Passy, por una anemia aplásica causada por la exposición a la radiación de tubos de ensayo con radio que guardaba en los bolsillos en el trabajo y en la construcción de las unidades móviles de rayos X de la Primera Guerra Mundial.")
 
     val youyou = Cientificas ("Tu Youyou", arrayOf(
         "1. Nació en China en 1930\n",
@@ -26,7 +30,16 @@ val marie = Cientificas ("Marie Curie", arrayOf(
         "8. Recibió el premio Albert Lasker en 2011 de Investigación Médica Clínica\n",
         "9. Recibió el premio Nobel de medicina en 2015\n",
         "10. Vive en Beijing\n"
-    ),R.drawable.tu_youyou)
+    ),R.drawable.tu_youyou,
+    "Tu Youyou nació el 30 de Diciembre de 1930, en Ningbó, una ciudad de la costa este de China. Su padre trabajaba en un banco mientras que su madre cuidaba de sus 4 hermanos varones y ella. En su familia, se le daba mucha importancia a la educación de los niños. Esto le permitió asistir a las mejores escuelas de la región.\n" +
+            "\n" +
+            "Desafortunadamente, a los 16 años de edad, contrajo la tuberculósis, lo que le obligó a abandonar sus estudios por dos años para recibir tratamiento en casa. Sin embargo, este hecho fue el que le ayudó a descubrir su vocación por la investigación médica. Así, tras graduarse en el Instituto en 1946, fue aceptada en la Escuela de Medicina de la Universidad de Peking para estudiar en el departamento de Ciencias Farmacéuticas.\n" +
+            "\n" +
+            "Durante la carrera, tuvo la oportunidad de estudiar el origen de las plantas medicinales, su funcionamiento, clasificación, como extraer ingredientes activos de estas etc. Esta formación fue esencial para los trabajos que desempeñaría en los próximos años.\n" +
+            "\n" +
+            "Tras licenciarse, estudió, durante dos años y medio, medicina tradicional China. Esto le permitió conseguir un puesto de trabajo como investigadora en La Academia de Medicina tradicional China, que ahora se conoce como Academia de Ciencias Médicas Chinas. Su primera investigación aquí consistió en el uso de la planta Lobelia chinensis, como tratamiento de la esquistosomiasis. Esta enfermedad la causa un platelminto y era muy frecuente en China en el siglo XX. \n" +
+            "\n" +
+            "En los últimos 60 años, ha tenido distintos cargos en la Academia de Ciencias Médicas Chinas, como jefe del departamento de Química (1973-1990) o jefe del Centro de investigación de la Artemisinina. También se le han asignado cargos como profesora asociada y ha sido jefe de profesores de la Academia.")
 
     val gertrude = Cientificas ("Gertrude B. Elion", arrayOf(
         "1. Nació en Estados Unidos\n",
@@ -39,7 +52,19 @@ val marie = Cientificas ("Marie Curie", arrayOf(
         "8. Desarrolló el primer fármaco eficaz contra la leucemia infantil\n",
         "9. Fue la primera mujer que perteneció al National Inventors Hall of fame\n",
         "10. Falleció en USA en 1999\n"
-    ),R.drawable.gertrude_b_elion)
+    ),R.drawable.gertrude_b_elion, "Nacida en la ciudad de Nueva York, hija de emigrantes judíos, se licenció en el Hunter College en 1937 y en la Universidad de Nueva York en 1941. Murió por causas naturales en Carolina del Norte en 1999, con 81 años de edad. Permaneció soltera y nunca tuvo hijos.1\n" +
+            "\n" +
+            "A la hora de decidirse por una especialización en sus estudios le influyó mucho la enfermedad que padecía su abuelo, con el que estaba muy unida, y que murió de cáncer cuando ella tenía 15 años. Este hecho la motivó a ahondar más en esa enfermedad y en el modo de curarla. Por tanto, se decidió por la rama científica: química.\n" +
+            "\n" +
+            "Tal y como relatan Laia Rosich y Félix Bosch de la Fundación Dr. Antoni Esteve, Elion siempre mostró interés por adquirir nuevos conocimientos. Ambos afirman que fue una persona con gran determinación y perseverancia, lo que le permitió afrontar los prejuicios contra su condición de mujer.1\u200B\n" +
+            "\n" +
+            "Estudió Química en el Hunter College cuando sólo tenía 15 años, dos menos de lo que correspondía. Elion consiguió cursar la licenciatura de forma gratuita gracias a su buen expediente académico. El crack financiero de 1929 había afectado de modo considerable a la situación económica de la familia, que no podía permitirse pagar los estudios de su hija en la Universidad.3\u200B\n" +
+            "\n" +
+            "Las dificultades también continuaron al salir de la Universidad. Como en toda crisis económica, no había mucho trabajo. Además, las mujeres científicas tenían más difícil el acceso al mundo laboral por aquel entonces. \"En una entrevista de trabajo, fue rechazada por temor a distraer la atención de los trabajadores que, por supuesto, eran todos hombres\", cuentan Rosich y Bosch. Elion combinó la enseñanza con un pequeño empleo de ayudante de laboratorio para costearse los estudios de postgrado.1\u200B\n" +
+            "\n" +
+            "En 1939 empezó un máster en Química en la Universidad de Nueva York. Era la única mujer que había. Trabajaba por la mañana como recepcionista en un consultorio médico y por las tardes como profesora de química y física. Dedicaba las noches y los fines de semana a estudiar el máster, el cual terminó en 1941.1\u200B\n" +
+            "\n" +
+            "El mismo año que Elion terminó el máster, máxima titulación académica que consiguió, su prometido falleció a causa de una endocarditis bacteriana. Una enfermedad que fue curable sólo unos años después con la llegada de la penicilina. La pérdida de ambos seres queridos fue el detonante para esforzarse en mayor medida por encontrar un tratamiento a las enfermedades que sufrieron.1\u200B")
 
     val josefa = Cientificas ("Josefa Yzuel", arrayOf(
         "1. Nació en Huesca en 1940\n",

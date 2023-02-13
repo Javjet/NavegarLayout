@@ -24,7 +24,7 @@ import com.iessanalberto.dam2.javiet.navegarlayout.R
 import com.iessanalberto.dam2.javiet.navegarlayout.navigation.AppScreens
 
 @Composable
-fun InitScreen(navController: NavController){
+fun InitScreen(navController: NavController) {
     /*Scaffold(topBar = {
         TopAppBar() {
             Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Atra Premo" ,
@@ -39,16 +39,19 @@ fun InitScreen(navController: NavController){
     initBodyContent(navController)
 
 }
+
 @Composable
 fun initBodyContent(navController: NavController) {
 
 
-    Column(modifier = Modifier
-        .background(color = Color(0xFF03aca5))
-        .fillMaxSize()
-        .verticalScroll(rememberScrollState()),
+    Column(
+        modifier = Modifier
+
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
+
     ) {
 
         Spacer(modifier = Modifier.height(40.dp))
@@ -56,14 +59,23 @@ fun initBodyContent(navController: NavController) {
             modifier = Modifier
                 .height(100.dp)
                 .fillMaxWidth()
-        ){
-            Row(Modifier.fillMaxSize(),
+        ) {
+            Row(
+                Modifier.fillMaxSize(),
                 horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.Top) {
-                Image(painter = painterResource(id = R.drawable.onceflogonobackground),
-                    contentDescription = "Logo 11F", Modifier.size(110.dp) )
+                verticalAlignment = Alignment.Top
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.onceflogonobackground),
+                    contentDescription = "Logo 11F", Modifier.size(110.dp)
+                )
 
-                Text("Quien Soy,\nCientificas", fontSize = 40.sp, color = Color.White, modifier = Modifier.width(250.dp) )
+                Text(
+                    "Quien Soy,\nCientificas",
+                    fontSize = 40.sp,
+                    color = Color.White,
+                    modifier = Modifier.width(250.dp)
+                )
                 Spacer(modifier = Modifier.width(20.dp))
 
             }
@@ -75,9 +87,12 @@ fun initBodyContent(navController: NavController) {
             .border(2.dp, Color.Black, shape = RoundedCornerShape(90.dp))
             .width(180.dp)
             .height(60.dp),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Gray,contentColor = Color.White),
-            shape=RoundedCornerShape(90.dp),
-            onClick = { navController.navigate(route = AppScreens.gameScreen.route)}) {
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color.Gray,
+                contentColor = Color.White
+            ),
+            shape = RoundedCornerShape(90.dp),
+            onClick = { navController.navigate(route = AppScreens.gameScreen.route) }) {
             Text(text = "Juega", fontSize = 20.sp)
         }
         Spacer(modifier = Modifier.height(20.dp))
@@ -85,9 +100,12 @@ fun initBodyContent(navController: NavController) {
             .border(2.dp, Color.Black, shape = RoundedCornerShape(90.dp))
             .width(180.dp)
             .height(60.dp),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Gray,contentColor = Color.White),
-            shape=RoundedCornerShape(90.dp),
-            onClick = {navController.navigate(route = AppScreens.firstScreen.route)}) {
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color.Gray,
+                contentColor = Color.White
+            ),
+            shape = RoundedCornerShape(90.dp),
+            onClick = { navController.navigate(route = AppScreens.firstScreen.route) }) {
             Text(text = "Aprende", fontSize = 20.sp)
         }
 
@@ -96,10 +114,13 @@ fun initBodyContent(navController: NavController) {
             .border(2.dp, Color.Black, shape = RoundedCornerShape(90.dp))
             .width(180.dp)
             .height(60.dp),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Gray,contentColor = Color.White),
-            shape=RoundedCornerShape(90.dp),
-            onClick = {navController.navigate(route = AppScreens.secondScreen.route)}) {
-            Text(text = "Instrucciones",fontSize = 20.sp)
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color.Gray,
+                contentColor = Color.White
+            ),
+            shape = RoundedCornerShape(90.dp),
+            onClick = { navController.navigate(route = AppScreens.secondScreen.route) }) {
+            Text(text = "Instrucciones", fontSize = 20.sp)
         }
         Spacer(modifier = Modifier.height(20.dp))
     }

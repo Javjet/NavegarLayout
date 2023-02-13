@@ -14,11 +14,11 @@ import com.iessanalberto.dam2.javiet.navegarlayout.CientificasLista
 import com.iessanalberto.dam2.javiet.navegarlayout.navigation.AppScreens
 
 @Composable
-fun SecondScreen(navController: NavController){
+fun SecondScreen(navController: NavController) {
     Scaffold(topBar = {
         TopAppBar() {
-            Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Atra Premo" ,
-            modifier = Modifier.clickable {navController.navigate(route = AppScreens.firstScreen.route)  })
+            Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Atra Premo",
+                modifier = Modifier.clickable { navController.navigate(route = AppScreens.firstScreen.route) })
             Spacer(modifier = Modifier.width(8.dp))
             Text(text = "Segunda Pantalla")
         }
@@ -30,10 +30,12 @@ fun SecondScreen(navController: NavController){
 
 @Composable
 fun secondBodyContent(navController: NavController) {
-    Column(Modifier.fillMaxSize(),
+    Column(
+        Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center){
-        Text(text="Hola mundo Due")
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(text = "Hola mundo Due")
     }
 }
 

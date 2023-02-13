@@ -11,14 +11,15 @@ import kotlinx.coroutines.flow.update
 import com.iessanalberto.dam2.javiet.navegarlayout.CientificasLista
 import com.iessanalberto.dam2.javiet.navegarlayout.data.CIENTIFICAS_CLUES_MAX
 import com.iessanalberto.dam2.javiet.navegarlayout.data.Cientificas
-import com.iessanalberto.dam2.javiet.navegarlayout.data.Cientificas_Act
+import com.iessanalberto.dam2.javiet.navegarlayout.data.Cientificas_Act_Max
 import com.iessanalberto.dam2.javiet.navegarlayout.data.SCORE_INCREASE
 
 class GameViewModel : ViewModel() {
 
     // Game UI state
     private val _uiState = MutableStateFlow(GameUiState())
-    val uiState : StateFlow<GameUiState> = _uiState.asStateFlow()
+    val uiState: StateFlow<GameUiState> = _uiState.asStateFlow()
+
     // Declare private mutable variable that can only be modified
     // within the class it is declared.
     private var _count = 0
@@ -33,6 +34,7 @@ class GameViewModel : ViewModel() {
     private var usedScientifics: MutableSet<Cientificas> = mutableSetOf()
     var userGuess by mutableStateOf("")
         private set
+
     init {
         resetGame()
     }
@@ -47,22 +49,24 @@ class GameViewModel : ViewModel() {
             return currentScientific;
         }
     }
+
     private fun updateGameState(updatedScore: Int) {
-        if (usedScientifics.size == Cientificas_Act){
-        //Last round in the game, update isGameOver to true, don't pick a new word
+        if (usedScientifics.size == Cientificas_Act_Max) {
+            //Last round in the game, update isGameOver to true, don't pick a new word
             _uiState.update { currentState ->
                 currentState.copy(
                     isGuessedScientificWrong = false,
                     score = updatedScore,
-                    currentScientific = currentState.currentScientific.inc(),
+                    currentScientific = currentState.currentScientific + 1,
                     isGameOver = true
                 )
-            }        } else{
+            }
+        } else {
             // Normal round in the game
             _uiState.update { currentState ->
                 currentState.copy(
                     isGuessedScientificWrong = false,
-                    currentScientific = currentState.currentScientific.inc(),
+                    currentScientific = currentState.currentScientific+1,
                     currentScientificData = pickRandomCientificas(),
                     score = updatedScore
                 )
@@ -80,8 +84,8 @@ class GameViewModel : ViewModel() {
             // User's guess is correct, increase the score
             // and call updateGameState() to prepare the game for next round
             val updatedScore = _uiState.value.score.plus(SCORE_INCREASE)
+            _uiState.update { currentState -> currentState.copy() }
             updateGameState(updatedScore)
-            skipScientific()
         } else {
             // User's guess is wrong, show an error
             _uiState.update { currentState ->
@@ -90,72 +94,67 @@ class GameViewModel : ViewModel() {
         }
     }
 
-    private fun shuffleCurrentWord(word: String): String {
-        val tempWord = word.toCharArray()
-        // Scramble the word
-        do{
-            tempWord.shuffle()
-        }while (String(tempWord).equals(word))
-        return String(tempWord)
-    }
-
     fun resetGame() {
         usedScientifics.clear()
         _uiState.value = GameUiState(currentScientificData = pickRandomCientificas())
     }
-    fun updateUserGuess(guessedWord: String){
+
+    fun updateUserGuess(guessedWord: String) {
 
         userGuess = guessedWord
         _uiState.update { currentState ->
             currentState.copy(isGuessedScientificWrong = false)
         }
     }
+
     fun goForwardKey(lista: List<Cientificas>) {
-        if (!CientificasLista[CientificasLista.indexOf(lista[0])].equals((CientificasLista.last()))){
+        if (!CientificasLista[CientificasLista.indexOf(lista[0])].equals((CientificasLista.last()))) {
             _uiState.update { currentState ->
-                currentState.copy(positionLearn = currentState.positionLearn+1)
+                currentState.copy(positionLearn = currentState.positionLearn + 1)
             }
-        }
-        else{
+        } else {
             _uiState.update { currentState ->
                 currentState.copy(positionLearn = 0)
             }
         }
     }
+
     fun goBackKey(lista: List<Cientificas>) {
-        if (!CientificasLista[CientificasLista.indexOf(lista[0])].equals((CientificasLista.first()))){
+        if (!CientificasLista[CientificasLista.indexOf(lista[0])].equals((CientificasLista.first()))) {
             _uiState.update { currentState ->
-                currentState.copy(positionLearn = currentState.positionLearn-1)
+                currentState.copy(positionLearn = currentState.positionLearn - 1)
             }
-        }
-        else{
+        } else {
             _uiState.update { currentState ->
-                currentState.copy(positionLearn = CientificasLista.size-1)
+                currentState.copy(positionLearn = CientificasLista.size - 1)
             }
 
         }
     }
+
     fun updateClue() {
-        if (_uiState.value.cluePosition+1<= CIENTIFICAS_CLUES_MAX) {
+        if (_uiState.value.cluePosition + 1 <= CIENTIFICAS_CLUES_MAX) {
             _uiState.update { currentState ->
-                currentState.copy(cluePosition = _uiState.value.cluePosition+1)
+                currentState.copy(cluePosition = _uiState.value.cluePosition + 1)
             }
         }
     }
+
     fun skipScientific() {
         updateGameState(_uiState.value.score)
         // Reset user guess
         updateUserGuess("")
     }
+
     fun compress() {
         _uiState.update { currentState ->
-            currentState.copy(CompressView=true)
+            currentState.copy(CompressView = true)
         }
     }
 
     fun extends() {
         _uiState.update { currentState ->
-            currentState.copy(CompressView=false)
+            currentState.copy(CompressView = false)
         }
     }
 

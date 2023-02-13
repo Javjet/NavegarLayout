@@ -11,5 +11,5 @@ data class GameUiState(
     val isGameOver: Boolean = false,
     val positionLearn: Int=0,
     val cluePosition: Int=1,
-    val CompressView: Boolean=true
+    val CompressView: Boolean=false
     )

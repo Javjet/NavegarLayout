@@ -58,9 +58,12 @@ fun BodyContent(navController: NavController,gameViewModel: GameViewModel = view
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally) {
         Spacer(modifier = Modifier.height(20.dp))
-        Box(modifier = Modifier.size(200.dp).fillMaxSize()){
+        Box(modifier = Modifier
+            .size(200.dp)
+            .fillMaxSize()){
 
-            Image( painter = painterResource(id = lista[0].ImageId),contentDescription = null, modifier = Modifier.fillMaxSize()
+            Image( painter = painterResource(id = lista[0].ImageId),contentDescription = null, modifier = Modifier
+                .fillMaxSize()
 
                 .clip(RoundedCornerShape(90.dp)), alignment = Alignment.Center,)
 
@@ -77,7 +80,11 @@ fun BodyContent(navController: NavController,gameViewModel: GameViewModel = view
                 )
             }
             Spacer(modifier = Modifier.width(10.dp))
-            IconButton(modifier = Modifier.background(Color.Gray, shape = RoundedCornerShape(100.dp)), onClick = {gameViewModel.goForwardKey(lista) }) {
+            IconButton(
+                modifier = Modifier.background(
+                    Color.Gray,
+                    shape = RoundedCornerShape(100.dp)
+                ), onClick = {gameViewModel.goForwardKey(lista) }) {
                 Icon(
                     Icons.Filled.KeyboardArrowRight,
                     contentDescription = "Avanzar",
@@ -101,9 +108,10 @@ fun BodyContent(navController: NavController,gameViewModel: GameViewModel = view
                             }
 
                         Box(modifier = Modifier
-                            .border(2.dp, Color.Black,RoundedCornerShape(55.dp))
+                            .border(2.dp, Color.Black, RoundedCornerShape(55.dp))
                             .clip(RoundedCornerShape(55.dp))
-                            .background(Color.White).padding(20.dp)
+                            .background(Color.White)
+                            .padding(20.dp)
                             ){
                             Text(
                                 text = pistasTotales,

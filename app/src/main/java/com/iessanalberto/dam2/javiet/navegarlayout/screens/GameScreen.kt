@@ -1,4 +1,3 @@
-
 /*
  * Copyright (c)2022 The Android Open Source Project
  *
@@ -31,13 +30,12 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.KeyboardArrowUp
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -46,10 +44,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.toSize
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.iessanalberto.dam2.javiet.navegarlayout.R
 import com.iessanalberto.dam2.javiet.navegarlayout.data.Cientificas
+import com.iessanalberto.dam2.javiet.navegarlayout.data.Cientificas_Act_Max
+import com.iessanalberto.dam2.javiet.navegarlayout.specificControls.ExposedDropdownMenu
+import com.iessanalberto.dam2.javiet.navegarlayout.specificControls.rememberExposedMenuStateHolder
 import com.iessanalberto.dam2.javiet.navegarlayout.ui.GameViewModel
 import com.iessanalberto.dam2.javiet.navegarlayout.ui.theme.OnceColor
 
@@ -65,72 +67,151 @@ fun GameScreen(
     modifier: Modifier = Modifier,
     gameViewModel: GameViewModel = viewModel()
 ) {
+
     val gameUiState by gameViewModel.uiState.collectAsState()
+
+
+
+
     Column(
         modifier = modifier
-            .background(OnceColor)
-            .verticalScroll(rememberScrollState())
-            .fillMaxSize()
-            .padding(16.dp, 0.dp, 16.dp, 16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+            .fillMaxSize(1.0f),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        TopAppBar(
 
-        GameStatus(
-            scientificCount = gameUiState.currentScientific,
-            score = gameUiState.score
-        )
-        GameLayout(
-            userGuess = gameViewModel.userGuess,
-            isGuessWrong = gameUiState.isGuessedScientificWrong,
-            onUserGuessChanged = { gameViewModel.updateUserGuess(it) },
-            onKeyboardDone = {gameViewModel.checkUserGuess() },
-            gameViewModel= gameViewModel,
-            currentScientific = gameUiState.currentScientificData,
-        )
-        Row(
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(top = 16.dp)
-                .background(OnceColor),
-            horizontalArrangement = Arrangement.SpaceAround
+            modifier = Modifier.fillMaxWidth(),
         ) {
-            OutlinedButton(
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.White,contentColor = Color.Gray),
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(8.dp, 0.dp, end = 8.dp, 0.dp)
-                    .fillMaxWidth()
-                    .height(55.dp)
-                    .border(2.dp, Color.Black, shape = RoundedCornerShape(90.dp)),
+            GameStatus(
+                scientificCount = gameUiState.currentScientific,
+                score = gameUiState.score
+            )
+        }
+        Image(
+            painter = painterResource(id = R.drawable.unknown_girl), contentDescription = null,
+            modifier = Modifier.size(100.dp), alignment = Alignment.Center,
+        )
 
-                shape=RoundedCornerShape(90.dp),
-                onClick = { gameViewModel.skipScientific() },
+        gameUiState.currentScientificData?.let {
+            Text(
+                text = it.nombre,
+                fontSize = 30.sp, fontStyle = FontStyle.Italic, fontWeight = FontWeight.Bold,
+                modifier = Modifier.align(Alignment.CenterHorizontally)
+            )
+        }
+        Box(
+            modifier = Modifier
+                .fillMaxHeight(0.55f)
+        ) {
+            GameLayout(
+                userGuess = gameViewModel.userGuess,
+                isGuessWrong = gameUiState.isGuessedScientificWrong,
+                onUserGuessChanged = { gameViewModel.updateUserGuess(it) },
+                onKeyboardDone = { gameViewModel.checkUserGuess() },
+                gameViewModel = gameViewModel,
+                currentScientific = gameUiState.currentScientificData,
+            )
+        }
+        Box(
+            modifier = Modifier
+                .padding(16.dp, 0.dp, 16.dp, 16.dp),
+        ) {
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(stringResource(R.string.skip), fontSize = 20.sp, fontWeight = FontWeight.Bold)
-            }
-            Button(
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Gray,contentColor = Color.White),
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(start = 8.dp, 0.dp, 0.dp, 0.dp)
-                    .fillMaxWidth()
-                    .height(55.dp)
-                    .border(2.dp, Color.Black, shape = RoundedCornerShape(90.dp)),
+                val stateHolder = rememberExposedMenuStateHolder()
+                OutlinedTextField(
+                    //value = userGuess,
+                    value = gameViewModel.userGuess,
+                    singleLine = true,
+                    modifier = Modifier
+                        .fillMaxWidth(0.9f)
+                        .onGloballyPositioned {
+                            stateHolder.onSize(it.size.toSize())
+                        },
+                    /*.clickable {expanded = true },*/
+                    onValueChange = { gameViewModel.updateUserGuess(it) },
 
-                shape=RoundedCornerShape(90.dp),
-                onClick = { gameViewModel.checkUserGuess() }
-            ) {
-                Text(stringResource(R.string.submit), fontSize = 20.sp, fontWeight = FontWeight.Bold)
-                /*
-                Button(modifier = Modifier
-                .border(2.dp, Color.Black, shape = RoundedCornerShape(90.dp))
-                .fillMaxWidth()
-                .weight(1f)
-                .padding(start = 8.dp),
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Gray,contentColor = Color.White),
-                shape=RoundedCornerShape(90.dp),
-                */
+                    label = {
+                        if (gameUiState.isGuessedScientificWrong) {
+                            Text(stringResource(R.string.wrong_guess))
+                        } else {
+                            Text(stringResource(R.string.enter_your_word))
+                        }
+                    },
+                    trailingIcon = {
+                        Icon(painter = painterResource(id = stateHolder.icon),
+                            contentDescription = null,
+                            Modifier.clickable { stateHolder.onEnabled(!(stateHolder.enabled)) }
+                        )
+                    },
+                    isError = gameUiState.isGuessedScientificWrong,
+                    keyboardOptions = KeyboardOptions.Default.copy(
+                        imeAction = ImeAction.Done
+                    ),
+                    keyboardActions = KeyboardActions(
+                        onDone = { gameViewModel.checkUserGuess() }
+                    ),
+
+                    )
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 16.dp),
+                    horizontalArrangement = Arrangement.SpaceAround
+                ) {
+                    OutlinedButton(
+                        colors = ButtonDefaults.buttonColors(
+                            backgroundColor = Color.White,
+                            contentColor = Color.Gray
+                        ),
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(8.dp, 0.dp, end = 8.dp, 0.dp)
+                            .fillMaxWidth()
+                            .height(55.dp)
+                            .border(2.dp, Color.Black, shape = RoundedCornerShape(90.dp)),
+
+                        shape = RoundedCornerShape(90.dp),
+                        onClick = { gameViewModel.skipScientific() },
+                    ) {
+                        Text(
+                            stringResource(R.string.skip),
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                    Button(
+                        colors = ButtonDefaults.buttonColors(
+                            backgroundColor = Color.Gray,
+                            contentColor = Color.White
+                        ),
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(start = 8.dp, 0.dp, 0.dp, 0.dp)
+                            .fillMaxWidth()
+                            .height(55.dp)
+                            .border(2.dp, Color.Black, shape = RoundedCornerShape(90.dp)),
+
+                        shape = RoundedCornerShape(90.dp),
+                        onClick = { gameViewModel.checkUserGuess() }
+
+                    ) {
+                        Text(
+                            stringResource(R.string.submit),
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                }
+                ExposedDropdownMenu(stateHolder = stateHolder, gameViewModel)
             }
+        }
+
+        BottomAppBar(modifier = Modifier.fillMaxWidth()) {
+
         }
         if (gameUiState.isGameOver) {
             FinalScoreDialog(
@@ -141,23 +222,24 @@ fun GameScreen(
     }
 }
 
+
 @Composable
-fun GameStatus(scientificCount: Int, score: Int,modifier: Modifier = Modifier) {
+fun GameStatus(scientificCount: Int, score: Int, modifier: Modifier = Modifier) {
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(16.dp)
+            .padding(10.dp)
             .size(48.dp),
     ) {
         Text(
-            text = stringResource(R.string.scientific_count, scientificCount),
+            text = stringResource(R.string.scientific_count) + ": $scientificCount/$Cientificas_Act_Max",
             fontSize = 18.sp,
         )
         Text(
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentWidth(Alignment.End),
-            text = stringResource(R.string.score, score),
+            text = stringResource(R.string.score, score) + ": $score",
             fontSize = 18.sp,
         )
     }
@@ -171,36 +253,32 @@ fun GameLayout(
     onUserGuessChanged: (String) -> Unit,
     onKeyboardDone: () -> Unit,
     gameViewModel: GameViewModel,
-    modifier: Modifier = Modifier) {
+    modifier: Modifier = Modifier
+) {
     var cientifica: List<Cientificas> = listOf(currentScientific) as List<Cientificas>
-    var imageId: Int =0
+    var imageId: Int = 0
 
-    Text(text = "asdasd")
+    // state of the menu
+    var expanded by remember {
+        mutableStateOf(false)
+    }
     Column(
+        modifier = Modifier,
         verticalArrangement = Arrangement.spacedBy(10.dp),
         horizontalAlignment = Alignment.CenterHorizontally
-        ) {
+    ) {
         val gameUiState by gameViewModel.uiState.collectAsState()
-        Image( painter = painterResource(id = R.drawable.unknown_girl),contentDescription = null,
-            modifier = Modifier.size(100.dp),alignment = Alignment.Center, )
 
-        Text(
-            //text = stringResource(R.string.whoim),
-            text = cientifica[0].nombre,
-            fontSize = 30.sp, fontStyle = FontStyle.Italic, fontWeight = FontWeight.Bold,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
-        )
         if (!gameUiState.CompressView) {
-        LazyColumn(
-            modifier = Modifier
-                .padding(20.dp)
-                .heightIn(0.dp, 1000.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
-        )
-        {
-            items(cientifica){
-                    cientifica ->
+            LazyColumn(
+                modifier = Modifier
+
+                    .padding(0.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+            )
+            {
+                items(cientifica) { cientifica ->
 
                     var pistasTotales = ""
                     if (gameUiState.cluePosition <= cientifica.Pistas.size) {
@@ -218,16 +296,19 @@ fun GameLayout(
 
                     Box(
                         modifier = Modifier
+
+                            .fillMaxHeight()
+                            .fillMaxWidth(0.8f)
                             .border(2.dp, Color.Black, RoundedCornerShape(55.dp))
                             .clip(RoundedCornerShape(55.dp))
                             .background(Color.White)
-                            .padding(20.dp)
+                            .padding(15.dp)
+                            .align(Alignment.CenterHorizontally),
+                        contentAlignment = Alignment.Center
                     ) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Text(
                                 text = pistasTotales,
-                                modifier = Modifier
-                                    .padding(10.dp),
                                 fontStyle = FontStyle.Italic,
                                 fontSize = 16.sp
                             )
@@ -288,9 +369,10 @@ fun GameLayout(
                     }
 
 
+                }
             }
-        }
-        }else{
+
+        } else {
             IconButton(modifier = Modifier
                 .background(Color.Gray, shape = RoundedCornerShape(100.dp))
                 .border(
@@ -306,10 +388,19 @@ fun GameLayout(
                 )
             }
         }
+
+
+        /*val stateHolder = rememberExposedMenuStateHolder()
         OutlinedTextField(
+            //value = userGuess,
             value = userGuess,
             singleLine = true,
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .onGloballyPositioned {
+                    stateHolder.onSize(it.size.toSize())
+                },
+            /*.clickable {expanded = true },*/
             onValueChange = onUserGuessChanged,
 
             label = {
@@ -319,6 +410,12 @@ fun GameLayout(
                     Text(stringResource(R.string.enter_your_word))
                 }
             },
+            trailingIcon = {
+                Icon(painter = painterResource(id = stateHolder.icon),
+                    contentDescription = null,
+                    Modifier.clickable { stateHolder.onEnabled(!(stateHolder.enabled)) }
+                )
+            },
             isError = isGuessWrong,
             keyboardOptions = KeyboardOptions.Default.copy(
                 imeAction = ImeAction.Done
@@ -326,10 +423,16 @@ fun GameLayout(
             keyboardActions = KeyboardActions(
                 onDone = { onKeyboardDone() }
             ),
-        )
+
+            )
+
+
+        ExposedDropdownMenu(stateHolder = stateHolder, gameViewModel)*/
+
 
     }
 }
+
 
 /*
  * Creates and shows an AlertDialog with final score.
@@ -349,7 +452,7 @@ private fun FinalScoreDialog(
             // onCloseRequest.
         },
         title = { Text(stringResource(R.string.congratulations)) },
-        text = { Text(stringResource(R.string.you_scored, score))},
+        text = { Text(stringResource(R.string.you_scored, score)) },
         modifier = modifier,
         dismissButton = {
             TextButton(
@@ -369,8 +472,6 @@ private fun FinalScoreDialog(
         }
     )
 }
-
-
 
 
 /*@Preview(showBackground = true)
